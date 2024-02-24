@@ -11,7 +11,7 @@ services:
 
   frontend:
     image: node:21-alpine3.18
-    command: npm start
+    command: sh -c "npm i && npm start"
     restart: unless-stopped
     working_dir: /app
     volumes:
