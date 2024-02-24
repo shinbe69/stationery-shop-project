@@ -1,0 +1,174 @@
+#productPage {
+}
+
+#productThumnail {
+    height: 60vh;
+    width: 50%;
+    float: left;
+    grid-row: 1;
+    border-radius: 10px;
+}
+
+#productThumnail img {
+    height: 90%;
+    width: 90%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#productInfo {
+    min-height: 60vh;
+    width: 50%;
+    grid-row: 1;
+    text-align: left;
+    float: left;
+    margin-bottom: 2em;
+}
+
+.ant-typography {
+    height: fit-content;
+    font-size: 1em;
+    text-align: left;
+}
+
+#productInfo p {
+    margin: 1em 0;
+}
+
+#addToCartSection {
+    display: flex;
+    height: 10%;
+    width: 100%;
+    margin: 1em 0;
+}
+
+#specificInfo {
+    height: 90%;
+    padding: 0 1em;
+}
+
+#selectQuantity {
+    display: flex;
+    border-radius: 1em;
+    width: 10em;
+    height: 3em;
+    overflow: hidden;
+    border: 1px solid #B2BEB5;
+    margin: auto 2em;
+}
+
+#selectQuantity p {
+    margin: auto;
+}
+
+#selectQuantity div:hover {
+    cursor: pointer;
+}
+
+#subtractButton:hover {
+    background-color: #ff5757;
+}
+
+#plusButton:hover {
+    background-color: #39c215;
+}
+
+#addToCartButton {
+    transition-duration: 0.2s;
+    display: flex;
+    margin: auto 0;
+    width: fit-content;
+    padding: 0.5em;
+    border: 1px solid #48b42c;
+    background-color: #4be024;
+}
+
+#addToCartButton:hover {
+    border-radius: 0.7em;
+    cursor: pointer;
+    background-color: #39c215;
+}
+
+#addToCartButton img{
+    height: 1.5em;
+    width: 1.5em;
+    float: left;
+}
+
+@media screen and (max-width: 970px) {
+    #productThumnail {
+        width: 40%;   
+    }
+
+    #productThumnail img {
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    #productInfo {
+        width: 60%;
+        padding: 0 1em;
+    }
+
+}
+
+@media screen and (max-width: 860px) {
+    #productThumnail {
+        width: 100%;   
+    }
+
+    #productThumnail img {
+        width: 95%;
+        border-radius: 5px;
+    }
+
+    #productInfo {
+        width: 100%;
+    }
+    
+    #addToCartSection {
+        right: 0;
+        width: 100%;
+    }
+
+    .ant-typography {
+        padding: 0 1em;
+    }
+
+    #specificInfo {
+        height: 100%;
+    }
+
+    #addToCartButton {
+        margin: auto 1em;
+    }
+
+    #selectQuantity {
+        margin: auto 1em;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    #addToCartButton p {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .ant-typography {
+        padding: 0;
+    }
+
+    #productInfo {
+        padding: 0;
+    }
+
+    #specificInfo {
+        width: 100%;
+        padding: 0;
+    }
+
+    .ant-typography {
+        padding: 0;
+    }
+}

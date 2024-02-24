@@ -1,0 +1,197 @@
+#logo {
+    width: 15%;
+    animation-duration: 0.6s;
+    animation-name: fadeIn;
+}
+
+#logo img {
+    width: fit-content;
+    height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+    padding: 0.3em 0;
+}
+
+#search {
+    width: 60%;
+    display: flex;
+    height: 100%;
+    position: relative;
+
+}
+
+.ant-input-group-addon * {
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.ant-dropdown-menu {
+    
+}
+
+.ant-dropdown * {
+    font-size: 1.1em;
+    padding: 0;
+}
+
+.ant-input-group-wrapper {
+    display: block;
+    width: 95%;
+    margin: auto;
+    animation-duration: 0.6s;
+}
+
+#userInfo {
+    margin: auto 0;
+    width: 25%;
+    height: 50%;
+    display: flex;
+    animation-duration: 0.6s;
+    animation-name: fadeIn;
+}
+
+#cart {
+    position: relative;
+    height: 100%;
+    width: 50%;
+    margin: auto;
+}
+
+#user {
+    height: 100%;
+    width: 50%;
+    display: flex;
+}
+
+#productQuantityInCart {
+    padding: 0.2em;
+    margin: auto;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 55%;
+    height: 1.5em;
+    width: 1.5em;
+    color: #FFFFFF;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cart img{
+    height: 100%;
+    margin: auto;
+    object-fit: contain;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#loginLink {
+}
+
+.separator {
+    width: 100%;
+    background-color: aqua;
+}
+
+#userIcon {
+    display: none;
+    z-index: 2;
+    height: 80%;
+    object-fit: contain;
+    margin: auto;
+}
+
+#searchLogo {
+    display: none;
+    z-index: 2;
+    height: 50%;
+    object-fit: contain;
+    margin: auto;
+    animation-name: fadeIn;
+    animation-duration: 0.6s;
+}
+
+#dropMenu {
+    display: none;
+    z-index: 2;
+    height: 40%;
+    object-fit: contain;
+    margin: auto;
+    animation-name: fadeIn;
+    animation-duration: 0.6s;
+}
+
+#back2FullHeader {
+    border-radius: 5px;
+    height: 2em;
+    margin: auto 0;
+    display: none;
+    animation-name: fadeIn;
+    animation-duration: 0.6s;
+}
+
+#back2FullHeader:hover {
+    cursor: pointer;
+    background-color: #FF5733;
+}
+
+#userIcon:hover {
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 1280px) {
+    #sideMenuSwitch {
+        visibility: visible;
+    }
+    #dropMenu {
+        display: block;
+    }
+    .ant-input-group-wrapper {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 565px) {
+    #logo {
+        width: 25%;
+    }
+
+    #search {
+        width: 30%;
+        display: flex;
+        height: 100%;
+        position: relative;
+    }
+
+    .ant-input-group-wrapper {
+        position: absolute;
+        width: 90vw;
+        top: 25%;
+        display: none;
+        animation-name: fadeIn;
+        transform: translateX(10vw);
+    }
+
+    #searchLogo, #dropMenu {
+        display: block;
+    }
+
+    #userInfo {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #searchLogo {
+        height: 40%;
+    }
+
+    #userInfo {
+        height: 40%;
+    }
+}

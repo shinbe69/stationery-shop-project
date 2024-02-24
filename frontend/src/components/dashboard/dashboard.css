@@ -1,0 +1,141 @@
+#dashboard {
+    display: flex;
+}
+
+#dashboard * {
+    animation-name: fadeIn;
+    animation-duration: 0.65s;
+}
+
+#controlPanel {
+    width: 80%;
+    text-align: left;
+    min-height: 100%;
+    margin: 0 2rem;
+    position: relative;
+}
+
+#addNewProduct {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+#compulsoryInfo {
+    width: 50%;
+    padding: 1em;
+}
+
+.inputProductInfo {
+    height: 10vh;
+    margin: 1em 0;
+}
+
+.inputProductInfo input:not([type=file]), select {
+    width: 100%;
+    height: 60%;
+    border-radius: 0.8em;
+    outline: none;
+    background-color: #F6F4EB;
+    border: 1px solid #D8D9DA;
+    padding: 1em;
+}
+
+select {
+    width: 50%;
+}
+
+.inputProductInfo input[type=number] {
+    font-style: italic;
+}
+
+.inputProductInfo input[type=file] {
+    font-style: italic;
+    height: 60%;
+    border-radius: 0.8em;
+    outline: none;
+    padding: 1em;
+}
+
+.inputProductInfo input:focus, select:focus {
+    outline: 2px solid #0071e3;
+}
+
+#optionalInfo {
+    width: 50%;
+    padding: 1em;
+}
+
+#additionalInfoInput {
+    min-height: 40%;
+    width: 100%;
+    resize: vertical;
+    border-radius: 0.8em;
+    outline: none;
+}
+
+#additionalInfoInput:focus {
+    outline: 2px solid #0071e3;
+    border: none;
+    padding: 1em;
+}
+
+#additionalInfoInput:placeholder-shown {
+    padding: 1em;
+}
+
+#previewThumnail {
+    height: 60%;
+    width: 100%;
+}
+
+#previewThumnail img {
+    display: flex;
+    margin: auto;
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
+}
+
+#submitAddProduct {
+    font-size: medium;
+    position: absolute;
+    bottom: 1em;
+    right: 50%;
+    color: #ffffff;
+    background-color: #48b42c;
+    font-weight: bold;
+    padding: 1rem 3rem;
+    height: 3rem;
+    width: fit-content;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#submitAddProduct:hover {
+    cursor: pointer;
+    border-radius: 1em;
+}
+
+@media screen and (max-width: 1280px) {
+    #controlPanel {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    #addNewProduct {
+        flex-direction: column;
+    }
+    #compulsoryInfo, #optionalInfo {
+        width: 100%;
+    }
+    #additionalInfoInput {
+        min-height: 40vh;
+    }
+}

@@ -1,0 +1,185 @@
+#cartManage {
+    min-height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#showOrders {
+    position: absolute;
+    left: 1em;
+    top: 0;
+    font-size: 1em;
+    padding: 0.25em 1em;
+    border-radius: 0.25em;
+    border: 1px solid #48b42c;
+    outline: none;
+}
+
+#showOrders:hover {
+    cursor: pointer;
+    background-color: #00C851;
+}
+
+#cartListHeader {
+    display: flex;
+}
+
+#cartListHeader h3 {
+    margin: auto;
+}
+
+#cartItemsContainer {
+    display: grid;
+    grid-row: auto;
+    height: fit-content;
+    width: 100%;
+    margin: 3em 0;
+    padding: 0 2em;
+}
+
+#cartItem {
+    display: flex;
+    height: 10vh;
+    margin: 1em 0;
+}
+
+#cartItem * {
+    margin: auto;
+}
+
+#itemThumnail {
+    width: 15%;
+    height: 90%;
+}
+
+#itemThumnail img {
+    object-fit: contain;
+    border-radius: 0.1em;
+    height: 100%;
+    width: 100%;
+}
+
+#unitPrice {
+    width: 25%;
+    color: #FF9B9B;
+}
+
+#itemQuantity {
+    width: 25%;
+}
+
+#removeCartItem {
+    color: #FF5733;
+    text-decoration: underline;
+}
+
+#removeCartItem:hover {
+    cursor: pointer;
+}
+
+#purchaseInfoContainer {
+    position: sticky;
+    bottom: 0px;
+    z-index: 3;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    padding: 1em 0;
+}
+
+#paymentInfo {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+}
+
+.seperateLine {
+    height: 3px;
+    width: 100%;
+    background-image: repeating-linear-gradient(135deg,#08acec,#08acec 1em,transparent 0,transparent 1.5em, #08acec,#08acec 1em);
+}
+
+#addressConfirm {
+    height: 50%;
+    width: 100%;
+    padding: 0.5em;
+}
+
+#paymentMethod {
+    padding: 0.5em;
+    width: 100%;
+}
+
+#purchaseContainer {
+    width: 50%;
+    height: 50%;
+    margin: auto 0;
+    padding: 0.5em;
+}
+
+#changeAddress {
+    text-decoration: underline;
+    color: #0474e4;
+    width: fit-content;
+}
+
+#purchase {
+    transition-duration: 0.2s;
+    font-size: 1em;
+    outline: none;
+    width: 40%;
+    padding: 0.5em;
+    border: 1px solid #48b42c;
+    background-color: #4be024;
+    margin: auto;
+}
+
+#changeAddress:hover {
+    cursor: pointer;
+}
+
+#purchase:hover {
+    cursor: pointer;
+    background-color: #39c215;
+    border-radius: 0.5em;
+}
+
+@media screen and (max-width: 1080px) {
+    #cartItemsContainer {
+        margin: 0;
+        padding: 0;
+    }
+    
+}
+
+@media screen and (max-width: 860px) {
+    #purchaseInfoContainer {
+        position: static;
+    }
+
+    #removeCartItem {
+        display: none;
+    }
+    #paymentInfo {
+        display: block;
+    }
+    #addressConfirm {
+        text-align: left;
+        width: 100%;
+        padding: 0.5em;
+        margin: 1em 0;
+    }
+    
+    #paymentMethod {
+        padding: 0.5em;
+        width: 100%;
+        margin: 1em 0;
+        text-align: left;
+    }
+    
+    #purchaseContainer {
+        text-align: left;
+        width: 100%;
+        padding: 0.5em;
+        margin: 1em 0;
+    }
+}

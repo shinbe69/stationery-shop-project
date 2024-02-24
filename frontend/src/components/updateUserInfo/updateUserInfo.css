@@ -1,0 +1,92 @@
+#updateUserInfo {
+    display: flex;
+    height: 100%;
+    position: relative;
+}
+
+#addressInfo {
+    text-align: left;
+    width: 50%;
+}
+
+#addressInfo select {
+    width: 100%;
+}
+
+#bio {
+    width: 50%;
+    text-align: left;
+}
+
+#buttonContainer {
+    position: absolute;
+    bottom: 1em;
+    right: 50%;
+    width: fit-content;
+    display: flex;
+}
+
+#submitSaveInfo {
+    margin: 0 1em;
+    font-size: medium;
+    color: #ffffff;
+    background-color: #48b42c;
+    font-weight: bold;
+    padding: 1rem 3rem;
+    height: 3rem;
+    width: fit-content;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#submitSaveInfo:hover {
+    cursor: pointer;
+    border-radius: 1em;
+}
+
+#skip {
+    margin: 0 1em;
+    background-color: #ffc107;
+    font-size: medium;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 1rem 3rem;
+    height: 3rem;
+    width: fit-content;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#skip:hover {
+    cursor: pointer;
+    border-radius: 1em;
+}
+
+@media screen and (max-width: 860px) {
+    #updateUserInfo {
+        display: block;
+    }
+
+    #updateUserInfo hr {
+        display: none;
+    }
+
+    #addressInfo, #bio {
+        width: 100%;
+        padding: 0 1em;
+    }
+
+    #buttonContainer {
+        position: static;
+        width: fit-content;
+        margin: auto;
+    }
+}

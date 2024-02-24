@@ -1,0 +1,128 @@
+#login {
+    display: flex;
+    background-image: url(https://c1.wallpaperflare.com/path/433/716/11/sky-travel-snow-statue-db4c23ff6bbaf59c69b383d0b7e5ec22.jpg);
+    background-size: cover;
+    height: 75%;
+}
+
+#login * {
+    font-size: large;
+}
+
+.form {
+    margin: auto;
+    font-size: larger;
+    height: 40vh;
+    width: calc(40vh/0.677);
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255, 0.5);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    display: grid;
+    grid-template-rows: auto;
+}
+
+#submitLogin, #register {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 1rem 3rem;
+    height: 3rem;
+    width: fit-content;
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#submitLogin {
+    background-color: #2074f4;
+}
+
+#submitLogin:hover {
+    cursor: pointer;
+}
+
+#submitLogin:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+#register {
+    background-color: #48b42c;
+    position: relative;
+    bottom: 1.5rem;
+}
+
+#register:hover {
+    cursor: pointer;
+}
+
+#register:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+.form input:not([type ="submit"]) {
+    padding: 1rem;
+    height: 40%;
+    width: 70%;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    margin: auto;
+}
+
+#loginForm input:not([type ="submit"]):focus {
+    outline: 2px solid #0071e3;
+}
+
+#forgotPassword {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #0474e4;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 1rem;
+}
+
+#back2Login {
+    border-radius: 5px;
+    height: 2em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0.5rem;
+}
+
+#back2Login:hover {
+    cursor: pointer;
+    background-color: #FF5733;
+}
+
+#forgotPassword:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 650px) {
+    .form {
+        height: 60vh;
+        width: 80%;
+        border-radius: 10px;
+    }
+
+    .form > input:not([type="submit"]){
+        font-size: medium;
+        width: 90%;
+    }
+
+    #forgotPassword {
+        margin: 0.5rem;
+    }
+}
+
