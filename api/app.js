@@ -3,6 +3,7 @@ const app = express()
 app.use(express.json({ limit: '10mb' }))
 require('dotenv').config()
 const db = require('./db/connectDB')
+const seeder = require('./db/seeder/seed')
 const router = require('./api/router')
 const cookieParser = require('cookie-parser')
 
@@ -13,6 +14,7 @@ db.isConnect.then(
             app.use(cookieParser())
             app.use(router)
             console.log('Server is running on', process.env.HOST, 'at port:', process.env.PORT, '!')
+            seeder()
         })
     },
     () => {

@@ -1,13 +1,15 @@
 services:
   api:
     image: node:21-alpine3.18
-    command: sh -c "npm i && npm run dev"
+    command: sh -c "npm i && npm run dev && npm run seeder"
     restart: unless-stopped
     working_dir: /app
     volumes:
       - ./api:/app
     ports:
       - 3001:3001
+    depends_on:
+      - db
 
   frontend:
     image: node:21-alpine3.18
@@ -18,3 +20,9 @@ services:
       - ./frontend:/app
     ports:
       - 3000:3000
+
+  db:
+    image: mongo:7.0.5-jammy
+    restart: unless-stopped
+    ports:
+      - 27017:27017

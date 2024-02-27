@@ -15,11 +15,7 @@ export default function LoginForm() {
     //handle submit button
     function handleLogin(event) {
         event.preventDefault()
-        if (!username.includes('@') && !username.includes('0')) {
-            setMessage('Vui lòng nhập email hoặc số điện thoại hợp lệ!')
-            showPopup()
-        }
-        else if (password.length < 6) {
+        if (password.length < 6) {
             setMessage('Mật khẩu phải có ít nhất 6 ký tự!')
             showPopup()
         }
