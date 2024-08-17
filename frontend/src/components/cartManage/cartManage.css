@@ -143,6 +143,10 @@
     border-radius: 0.5em;
 }
 
+.ant-table-thead > tr > th {
+    font-size: 18px;
+}
+
 @media screen and (max-width: 1080px) {
     #cartItemsContainer {
         margin: 0;

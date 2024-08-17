@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const Order = new Schema({
     items: {type: Object},
-    status: { type: String, default: 'unconfirmed' },
+    status: { type: String, enum: ['unconfirm', 'confirmed', 'delivering', 'deliveried'] , default: 'unconfirm' },
     value: Number,
     isPaid: { type: Boolean, default: false },
     address: String,

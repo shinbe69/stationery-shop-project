@@ -4,9 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { CartQuantityContext, CartContext, MessageContext } from '../../AppContainer'
 import './header.css'
 import { Input, Dropdown, Menu, Avatar, Button } from 'antd'
-import { selectTypeOfPopup, showPopup } from '../popup/popup'
-import Protected from '../protected/protected'
-import { UserOutlined } from '@ant-design/icons'
 
 const { Search } = Input
 export default function Header() {

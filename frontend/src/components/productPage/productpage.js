@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
-import { Typography } from 'antd'
+import { Typography, InputNumber, Form, Button } from 'antd'
 import { CartQuantityContext, CartContext, MessageContext } from '../../AppContainer'
 import { showPopup, selectTypeOfPopup } from '../popup/popup'
 import './productPage.css'
@@ -62,7 +62,7 @@ export default function ProductPage() {
         if (!isMerge)
           accumulator.push(currentValue)
         return accumulator
-      }
+    }
 
     return (
         <div id="productPage" >
@@ -70,22 +70,33 @@ export default function ProductPage() {
                 <img src={ product.state.thumnail } alt='product thumnail' />
             </div>
             <div id='productInfo'>
-                <div id='addToCartSection'>
+                {/* <div id='addToCartSection'>
                     <p style={{ whiteSpace: 'nowrap', color: '#999' }}>Số lượng</p>
-                    <div id='selectQuantity'>
-                        <div id='subtractButton' style={{ fontWeight: 'bold', width: '25%', display: 'flex' }} onClick={() => quantity === 1 ? {} : selectQuantity(quantity - 1) }>
+                    
+                        {/* <div id='subtractButton' style={{ fontWeight: 'bold', width: '25%', display: 'flex' }} onClick={() => quantity === 1 ? {} : selectQuantity(quantity - 1) }>
                             <p>-</p>
                         </div>
                         <p id='quantity' style={{ fontWeight: 'bold', width: '50%', textAlign: 'center' }}>{quantity}</p>
                         <div id='plusButton' style={{ fontWeight: 'bold', width: '25%', display: 'flex' }} onClick={() => selectQuantity(quantity + 1) }>
                             <p >+</p>
                         </div>
-                    </div>
+                    
                     <div id='addToCartButton' onClick={ handleAddToCart }>
                         <img src="add-to-cart.png" alt="add-to-cart" style={{ margin: 'auto' }} />
                         <p style={{ whiteSpace: 'nowrap', margin: 'auto', color: '#FFF' }} ><b>Thêm vào giỏ hàng</b></p>
                     </div>
-                </div>
+                    
+                </div> */}
+                <Form size='large' layout='inline'>
+                    <Form.Item label='Số lượng'>
+                        <InputNumber min={1} defaultValue={1} step={1} onChange={(value) => selectQuantity(value)} />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type='primary' htmlType='submit' onClick={handleAddToCart}>
+                            Thêm vào giỏ
+                        </Button>
+                    </Form.Item>
+                </Form>
                 <div id='specificInfo'>
                     <h2>Thông tin sản phẩm</h2>
                     <p><label style={{ color: '#999' }} >Tên:</label> &ensp;{ product.state.name }</p>

@@ -4,7 +4,7 @@ const path = require('path')
 const { ObjectId } = require('mongodb')
 const Product = require('../models/Product')
 const { checkAdmin } = require('./services')
-const { error } = require('console')
+const client = require('../db/connectCACHE')
 
 //Get Products
 router.post('/getProducts',  (req, res) => {
@@ -38,25 +38,47 @@ router.post('/getProducts',  (req, res) => {
                 })
                 break
             case 'bestsell':
-                Product.find(category ? { category }: {} )
-                .sort({ soldQuantity: 'descending' })
-                .limit(5)
-                .then(products => res.json(products))
-                .catch(error => {
-                    console.log(error)
-                    res.sendStatus(500)
-                })
+                ;(async () => {
+                    let bestsell = await client.get('bestsell')
+                    if (bestsell == null) {
+                        Product.find(category ? { category }: {} )
+                        .sort({ soldQuantity: 'descending' })
+                        .limit(5)
+                        .then(products => {
+                            client.set('bestsell', JSON.stringify(products))
+                            res.json(products)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            res.sendStatus(500)
+                        })
+                    }
+                    else {
+                        res.json(JSON.parse(bestsell))
+                    }
+                })();
                 break
             case 'recently':
                 let limit = req.body.limit ? req.body.limit : true
-                Product.find(category ? { category }: {} )
-                .sort({ createAt: 'descending' })
-                .limit(limit)
-                .then(products => res.json(products))
-                .catch(error => {
-                    console.log(error)
-                    res.sendStatus(500)
-                })
+                ;(async () => {
+                    let recentlyCache = await client.get('recently')
+                    if (recentlyCache == null) {
+                        Product.find(category ? { category }: {} )
+                        .sort({ createAt: 'descending' })
+                        .limit(limit)
+                        .then(products => {
+                            client.set('recently', JSON.stringify(products))
+                            res.json(products)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            res.sendStatus(500)
+                        })
+                    }
+                    else {
+                        res.json(JSON.parse(recentlyCache))
+                    }
+                })();
                 break
         }
     }

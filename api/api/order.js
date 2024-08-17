@@ -5,24 +5,16 @@ const { ObjectId } = require('mongodb')
 const Order = require('../models/Order')
 const User = require('../models/User')
 
-//Get Products
+//Get Orders
 router.get('/',  (req, res) => {
-    if(!req.cookies.isAdmin) {
-        Order.find({user: req.cookies.user})
+        Order.find()
+        .sort({ createAt: 'descending' })
         .then(products => {
             res.json(products)
         })
         .catch(error => console.log(error))
-    }
-    else {
-        Order.find({})
-        .then(products => {
-            res.json(products)
-        })
-        .catch(error => console.log(error))
-    }
 })
-//Get a product with specific id(s)
+//Get a order(s) with specific id(s)
 router.post('/getOrders', (req, res) => {
     Order.find({_id : req.body.orderID})
     .then(orders => {
@@ -47,49 +39,24 @@ router.post('/', (req, res) => {
         res.sendStatus(400)
     }
 })
-//Confirm order
-router.patch('/confirmOrder', (req, res) => {
-    let orderID = req.body.orderID
-    if (!orderID) {
-        res.sendStatus(400)
-    }
-    else {
-        Order.findOne({ _id: orderID })
-    .then(order => {
-        order.updateOne({ status: 'confirmed' })
-        .then(() => res.sendStatus(200))
-        .catch(error => console.log(error))
-    }).catch(error => {
-        console.log(error)
-        res.sendStatus(400)
-    })
-    }
-})
 //Update order
-router.patch('/updateOrder', (req, res) => {
+router.patch('/', (req, res) => {
     let orderID = req.body.orderID
     let phone = req.body.phone
     let address = req.body.address
+    let status = req.body.status
 
-    if (!orderID) {
+    if (!orderID || !phone || !address || !status) {
         res.sendStatus(400)
     }
     else {
         Order.findOne({ _id: orderID })
         .then(order => {
-            if (!phone || !address) {
-                if (order.status !== 'confirmed')
-                    order.updateOne({ status: 'confirmed' })
-                    .then(() => res.sendStatus(200))
-                    .catch(error => console.log(error))
-                else res.sendStatus(400)
-            }
-            else {
-                order.updateOne({ phone, address })
+                order.updateOne({ phone, address, status })
                 .then(() => res.sendStatus(200))
                 .catch(error => console.log(error))
             }
-        }).catch(error => {
+        ).catch(error => {
             console.log(error)
             res.sendStatus(400)
         })

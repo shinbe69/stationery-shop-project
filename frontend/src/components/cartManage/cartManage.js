@@ -1,10 +1,10 @@
+import { Button, Form, Image, InputNumber, Space, Table } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { useEffect, useState, useRef, useContext} from 'react'
 import { showPopup, selectTypeOfPopup } from '../popup/popup'
 import { MessageContext, CartContext } from '../../AppContainer'
 import './cartManage.css'
-import Item from './item'
 
 export default function CartManage () {
     const [cart, setCart] = useContext(CartContext)
@@ -17,10 +17,110 @@ export default function CartManage () {
     const intervalID = useRef()
     const timer = useRef(5)
 
+    const removeCartItem = (product_id) => {
+        cookie.cart.forEach((item, index) => {
+            if (item.id === product_id) {
+                cookie.cart.splice(index, 1)
+                
+            }
+        })
+        setCookie('cart', cookie.cart)
+        setMessage('Xóa sản phẩm thành công')
+        updateCart()
+    }
+
+    function updateCart() {
+        selectTypeOfPopup('SUCCESS')
+        showPopup()
+        let idArr = []
+        cookie.cart.forEach(item => {
+            idArr.push(item.id)
+        })
+
+        fetch('/api/products/getProductsById', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ productID: idArr })
+        }).then(res => res.json())
+        .then(products => {
+            products.forEach((product) => {
+                cookie.cart.forEach(item => {
+                    if (item.id === product._id)
+                        product.cartQuantity = item.quantity
+                })
+            })
+            navigate('/cart-manage', {
+                state: products
+            })
+        })
+        .catch(error => console.log(error))
+    }
+
+    const columns = [
+        {
+            title: 'Sản phẩm',
+            key: 'name',
+            dataIndex: 'name',
+            render: (value, record, index) => (
+                <div style={{ display: 'flex' }}>
+                    <Image width={100} src={products[index].thumnail} />
+                    <h3 style={{ margin: 'auto', paddingLeft: '0.5em' }}>{value}</h3>
+                </div>
+            )
+        },
+        {
+            title: 'Đơn giá',
+            dataIndex: 'price',
+            key: 'price',
+            render: (value) => (
+                <h4 style={{ width: '100%' }} id="unitPrice" >{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value) }</h4>
+            )
+        },
+        {
+            title: 'Số lượng',
+            key: 'quantity',
+            dataIndex: 'cartQuantity',
+            render: (value, record, index) => (
+                <Form size='large' layout='inline'>
+                    <Space >
+                        <Form.Item >
+                            <InputNumber min={1} defaultValue={value} step={1} onChange={(changeValue) => {
+                                console.log('cart:', cookie.cart)
+                                cookie.cart.forEach(item => {
+                                    if (item.id == products[index]._id) {
+                                        console.log('parameter:', changeValue)
+                                        item.quantity = changeValue
+                                    }
+                                })
+                                setCookie('cart', cookie.cart)
+                                updateCart()
+                                selectTypeOfPopup('SUCCESS')
+                                setMessage('Thay đổi số lượng thành công!')
+                                showPopup()
+                            }}/>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type='primary' danger onClick={() => removeCartItem(products[index]._id)}>
+                                Xóa sản phẩm
+                            </Button>
+                        </Form.Item>
+                    </Space>
+                </Form>
+            )
+        }
+    ]
+
     let totalPrice = 0
     products.forEach(item => {
         totalPrice += item.price * item.cartQuantity
     })
+
+    useEffect(() => {
+        console.log(products)
+    }, [])
 
     useEffect(() => {
         // fetch('/api/users/getUser', {
@@ -107,7 +207,7 @@ export default function CartManage () {
         <div id="cartManage">
             <h2>Các sản phẩm đang chờ trong giỏ hàng</h2>
             <div id='cartItemsContainer'>
-                <div id='cartListHeader' >
+                {/* <div id='cartListHeader' >
                     <h3 style={{ width: '50%', textDecoration: 'underline' }}>Sản phẩm</h3>
                     <hr />
                     <h3 style={{ width: '25%', textDecoration: 'underline' }}>Đơn giá</h3>
@@ -116,7 +216,8 @@ export default function CartManage () {
                 </div>
                 {products.map(product => (
                     <Item key={ product._id } product={ product } />
-                ))}
+                ))} */}
+                <Table bordered columns={columns} dataSource={products} pagination={false} style={{ overflow: 'auto' }}/>
             </div>
             <div id='purchaseInfoContainer'>
             { products.length === 0 ? <h3>Giỏ hàng của bạn đang trống</h3> : <>
