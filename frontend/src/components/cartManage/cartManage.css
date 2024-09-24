@@ -164,6 +164,7 @@
         display: none;
     }
     #paymentInfo {
+        width: 90%;
         display: block;
     }
     #addressConfirm {

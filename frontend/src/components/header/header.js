@@ -1,12 +1,14 @@
 import { useCookies } from 'react-cookie'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CartQuantityContext, CartContext, MessageContext } from '../../AppContainer'
 import './header.css'
-import { Input, Dropdown, Menu, Avatar, Button } from 'antd'
+import { Input, Dropdown, Menu, Popover, Form, Button, Checkbox } from 'antd'
+import { showPopup } from '../popup/popup'
 
 const { Search } = Input
 export default function Header() {
+    const [openLogin, setOpenLogin] = useState(false)
     const [cookie, setCookie, removeCookie] = useCookies()
     const [user, setUser] = useState('Đăng nhập')
     const [items, setItems] = useState([])
@@ -17,11 +19,101 @@ export default function Header() {
     const [message, setMessage] = useContext(MessageContext)
     const navigate = useNavigate()
     const location = useLocation()
+    const onFinish = (values) => {
+        if (values.password.length < 6) {
+            setMessage('Mật khẩu phải có ít nhất 6 ký tự!')
+            showPopup()
+        }
+        else {
+            //lOGIN
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({username: values.username, password: values.password})
+            })
+            .then((response) => {
+                if (response.status === 200) {
+                    navigate('/')
+                    setOpenLogin(false)
+                }
+                else {
+                    setMessage('Tên đăng nhập hoặc mật khẩu không đúng!')
+                    showPopup()
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+    };
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
     const userMenu = (
         <Menu>
             <Menu.Item key='1' disabled>{user}</Menu.Item>
             <Menu.Item key='2' danger onClick={handleLogout}>Đăng xuất</Menu.Item>
         </Menu>
+    )
+    const LoginForm = (
+        <Form
+            name="basic"
+            labelCol={{
+            span: 8,
+            }}
+            wrapperCol={{
+            span: 16,
+            }}
+            style={{
+                maxWidth: 600,
+            }}
+            initialValues={{
+            remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+        >
+            <Form.Item
+            label="Số điện thoại"
+            name="username"
+            rules={[
+                {
+                required: true,
+                message: 'Vui lòng nhập số điện thoại!',
+                },
+            ]}
+            >
+            <Input />
+            </Form.Item>
+
+            <Form.Item
+            label="Mật khẩu"
+            name="password"
+            rules={[
+                {
+                required: true,
+                message: 'Vui lòng nhập mật khẩu!',
+                },
+            ]}
+            >
+            <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+            wrapperCol={{
+                offset: 8,
+                span: 64,
+            }}
+            >
+            <Button type="primary" htmlType="submit">
+                OK
+            </Button>
+            </Form.Item>
+        </Form>
     )
 
     useEffect(() => {
@@ -170,10 +262,18 @@ export default function Header() {
                     <img src='cart.png' alt='cart' onClick={ handleCartClick }/>
                 </div>
                 <div id='user'>
-                    <a id='loginLink' href='/login' style={{textDecoration: 'underline', color: '#0474e4', margin: 'auto', whiteSpace: 'nowrap', overflow: 'hidden'}} >Đăng nhập</a>
+                    <Popover
+                        open={openLogin}
+                        trigger='click'
+                        content={
+                            () => (LoginForm)
+                        }
+                        style={{ boxShadow: 'rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px'}}
+                    >
+                        <a id='loginLink' onClick={() => setOpenLogin(true)} style={{textDecoration: 'underline', color: '#0474e4', margin: 'auto', whiteSpace: 'nowrap', overflow: 'hidden'}} >Đăng nhập</a>
+                    </Popover>
                     <Dropdown dropdownRender={() => (userMenu)} arrow placement='bottom'>
                         <img id='userIcon' src='user.png' alt='user'/>
-                        {/* <Avatar id='userIcon' shape='square' icon={<UserOutlined />}/> */}
                     </Dropdown>
                 </div>
             </div>

@@ -5,7 +5,7 @@ export default function Footer() {
         <div id="footer">
             <hr style={{ marginBottom: '1em' }} />
             <div id='footerChild' >
-                <div style={{ textAlign: 'center' }} className='footerInfo'>
+                <div className='footerInfo'>
                     <div >
                         <h3>Về cửa hàng Diệu Thiện</h3>
                         <p>Shop Diệu Thiện chuyên cung cấp các sản phẩm là cây xanh mini để bàn trang trí, phong thủy, quà tặng.</p>

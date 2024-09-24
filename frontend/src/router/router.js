@@ -77,23 +77,23 @@ const router = createBrowserRouter([
                         }
                     ]
                 },
-                {
-                    //Login
-                    path: "/",
-                    element: <Login />,
-                    children: [
-                        {
-                            //LoginForm
-                            path: '/login',
-                            element: <LoginForm />
-                        },
-                        {
-                            //SignupForm
-                            path: '/signup',
-                            element: <SignupForm />
-                        }
-                    ]
-                },
+                // {
+                //     //Login
+                //     path: "/",
+                //     element: <Login />,
+                //     children: [
+                //         {
+                //             //LoginForm
+                //             path: '/login',
+                //             element: <LoginForm />
+                //         },
+                //         {
+                //             //SignupForm
+                //             path: '/signup',
+                //             element: <SignupForm />
+                //         }
+                //     ]
+                // },
                 {
                     //About
                     path: "/about",

@@ -89,7 +89,8 @@
     border-radius: 50%;
 }
 
-#loginLink {
+#loginLink:hover {
+    cursor: pointer;
 }
 
 .separator {

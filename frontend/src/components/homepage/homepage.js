@@ -94,9 +94,10 @@ export default function Homepage() {
                         </div>
                     ))}
                 </Carousel>
-                <div id='banner'>
+                <Carousel dotPosition='left' autoplay infinite>
                     <img id='bannerImg' src='banner.png' alt='banner' />
-                </div>
+                    <img id='bannerImg' src='peace-lily.jpg' alt='banner' />
+                </Carousel>
             </div> : <></> }
             <h3 style={{ textAlign: 'left', margin: '1em 0', textDecoration: 'underline' }} >Sản phẩm mới thêm gần đây</h3>
             <div id='recentProducts'>

@@ -9,6 +9,10 @@ export default function Popup({ message }) {
 }
 
 export function showPopup() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // This enables smooth scrolling
+    })
     document.getElementById('warningPopup').style.transform = 'translateY(0vh)'
     setTimeout(() => {
         document.getElementById('warningPopup').style.transform = 'translateY(-50vh)'

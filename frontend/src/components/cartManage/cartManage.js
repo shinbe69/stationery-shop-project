@@ -88,18 +88,19 @@ export default function CartManage () {
                     <Space >
                         <Form.Item >
                             <InputNumber min={1} defaultValue={value} step={1} onChange={(changeValue) => {
-                                console.log('cart:', cookie.cart)
-                                cookie.cart.forEach(item => {
-                                    if (item.id == products[index]._id) {
-                                        console.log('parameter:', changeValue)
-                                        item.quantity = changeValue
-                                    }
-                                })
-                                setCookie('cart', cookie.cart)
-                                updateCart()
-                                selectTypeOfPopup('SUCCESS')
-                                setMessage('Thay đổi số lượng thành công!')
-                                showPopup()
+                                if (changeValue !== null) {
+                                    cookie.cart.forEach(item => {
+                                        if (item.id == products[index]._id) {
+                                            console.log('parameter:', changeValue)
+                                            item.quantity = changeValue
+                                        }
+                                    })
+                                    setCookie('cart', cookie.cart)
+                                    updateCart()
+                                    selectTypeOfPopup('SUCCESS')
+                                    setMessage('Thay đổi số lượng thành công!')
+                                    showPopup()
+                                }
                             }}/>
                         </Form.Item>
                         <Form.Item>
